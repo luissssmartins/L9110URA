@@ -67,6 +67,7 @@ a primeira instrução dada por 'PRG';
     "mqtt_port": 1883,
     "mqtt_user": "USER",
     "mqtt_password": "PASSWORD",
+    "webrepl_password": "PASSWORD",
     "topic_sub": "URA0XX/input",
     "topic_pub": "URA0XX/output"
 }

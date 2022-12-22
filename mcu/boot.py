@@ -2,7 +2,7 @@
 from mqtt.umqttsimple import MQTTClient
 from sensors.hcsr04 import HCSR04
 
-import ubinascii, machine, network, esp, gc
+import ubinascii, machine, network, esp, gc, webrepl
 import time, json
 
 esp.osdebug(None)
@@ -20,6 +20,7 @@ mqtt_address = config['mqtt_address']
 mqtt_port = config['mqtt_port']
 mqtt_user = config['mqtt_user']
 mqtt_password = config['mqtt_password']
+webrepl_password = config['webrepl_password']
 
 topic_sub = bytes(config['topic_sub'], 'utf-8')
 topic_pub = bytes(config['topic_pub'], 'utf-8')
@@ -43,4 +44,6 @@ if not station.isconnected():
         pass
 
     print(f'Connected to {ssid} with success. Config: {station.ifconfig()}')
+
+webrepl.start(password= webrepl_password)
 
