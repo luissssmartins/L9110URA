@@ -1,6 +1,6 @@
-from umqttsimple import MQTTClient
-
-from hcsr04 import HCSR04
+# URA
+from mqtt.umqttsimple import MQTTClient
+from sensors.hcsr04 import HCSR04
 
 import ubinascii, machine, network, esp, gc
 import time, json
@@ -8,11 +8,11 @@ import time, json
 esp.osdebug(None)
 gc.collect()
 
-config_file = open('config.json')
+config_file = open('configuration/config.json')
 config = json.load(config_file)
 config_file.close()
 
-clientd_id = ubinascii.hexlify(machine.unique_id())
+client_id = ubinascii.hexlify(machine.unique_id())
 
 ssid = config['ssid']
 ssid_password = config['ssid_password']
@@ -43,3 +43,4 @@ if not station.isconnected():
         pass
 
     print(f'Connected to {ssid} with success. Config: {station.ifconfig()}')
+
