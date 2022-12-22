@@ -60,9 +60,6 @@ a primeira instrução dada por 'PRG';
 ## Configuração dentro do MCU
 
 ```bash
-
-# Modelo abaixo
-
 {
     "ssid" : "SSID",
     "ssid_password": "PASSWORD",
