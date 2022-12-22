@@ -20,7 +20,6 @@ mqtt_address = config['mqtt_address']
 mqtt_port = config['mqtt_port']
 mqtt_user = config['mqtt_user']
 mqtt_password = config['mqtt_password']
-webrepl_password = config['webrepl_password']
 
 topic_sub = bytes(config['topic_sub'], 'utf-8')
 topic_pub = bytes(config['topic_pub'], 'utf-8')
@@ -45,5 +44,5 @@ if not station.isconnected():
 
     print(f'Connected to {ssid} with success. Config: {station.ifconfig()}')
 
-webrepl.start(password= webrepl_password)
+webrepl.start()
 

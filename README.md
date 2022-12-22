@@ -33,7 +33,7 @@ a primeira instrução dada por 'PRG';
 | A-1A | D13 | 
 | A-1B | D12 | 
 
-### Sensor de distância (Ultrassom) 
+### Sensor de distância (Ultrassônico) 
 
 | Sensor de distância | ESP32 |
 | --------------- | --------------- | 
@@ -42,7 +42,7 @@ a primeira instrução dada por 'PRG';
 | Echo  | D18 |
 | Vcc | 3.3v | 
 
-### Sensores de Linha 
+### Sensores de linha 
 
 | Sensor de Linha Esquerdo | ESP32 |
 | --------------- | --------------- | 
@@ -67,10 +67,34 @@ a primeira instrução dada por 'PRG';
     "mqtt_port": 1883,
     "mqtt_user": "USER",
     "mqtt_password": "PASSWORD",
-    "webrepl_password": "PASSWORD",
     "topic_sub": "URA0XX/input",
     "topic_pub": "URA0XX/output"
 }
 
 ```
+
+## Configuração do Web Repl
+
+```bash
+
+# Utilizando seu IDE de preferência, abra o terminal e digite
+
+$ import webrepl_setup
+
+# Após isso, um setup aparecerá e você deverá seguir o passo a passo
+
+WebREPL daemon auto-start status: disabled
+
+Would you like to (E)nable or (D)isable it running on boot?
+(Empty line to quit the setup)
+
+> E
+
+To enable WebREPL, you must set password for it
+New password: <defina uma senha>
+Confirm password: <repita a senha>
+
+Changes will be activated after reboot
+Would you like to reboot now? (y/n) y
+
 
