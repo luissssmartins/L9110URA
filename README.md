@@ -55,4 +55,24 @@ a primeira instrução dada por 'PRG';
 | --------------- | --------------- | 
 | G  | GND  | 
 | V+ | 3.3v | 
-| S  | D27 | 
+| S  | D27 |
+
+## Configuração dentro do MCU
+
+```bash
+
+# Modelo abaixo
+
+{
+    "ssid" : "SSID",
+    "ssid_password": "PASSWORD",
+    "mqtt_address": "XXX.XXX.XXX.XXX",
+    "mqtt_port": 1883,
+    "mqtt_user": "USER",
+    "mqtt_password": "PASSWORD",
+    "topic_sub": "URA0XX/input",
+    "topic_pub": "URA0XX/output"
+}
+
+```
+
