@@ -77,11 +77,9 @@ a primeira instrução dada por 'PRG';
 
 ```bash
 
-# Utilizando seu IDE de preferência, abra o terminal e digite
+# Utilizando seu IDE de preferência, abra o terminal do Python e siga o passo a passo padrão definido pelo setup:
 
-$ import webrepl_setup
-
-# Após isso, um setup aparecerá e você deverá seguir o passo a passo
+>> import webrepl_setup
 
 WebREPL daemon auto-start status: disabled
 
