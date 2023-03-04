@@ -101,6 +101,8 @@ Confirm password: <repita a senha>
 Changes will be activated after reboot
 Would you like to reboot now? (y/n) y
 
+```
+
 ## Baixando a interface WebRepl
 
 * Baixe o repositório do client web repl neste repositório [Client WebRepl](https://github.com/micropython/webrepl)
