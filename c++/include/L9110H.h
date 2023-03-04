@@ -9,7 +9,7 @@ class L9110H {
     public:
       L9110H();
 
-      void motor(int motorNumber, String command, int speed);
+      void motor(int motorNumber, String instruction, int speed);
 
       void forward(int i);
 
