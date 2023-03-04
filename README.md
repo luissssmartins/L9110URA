@@ -1,4 +1,4 @@
-# L9110URA (conhecido também como urinha ou uriel)
+# L9110URA (conhecido como URINHA)
 
 ![1](https://raw.githubusercontent.com/luissssmartins/L9110URA/main/images/L9110URA.jpg)
 
@@ -81,6 +81,8 @@ a primeira instrução dada por 'PRG';
 
 >> import webrepl_setup
 
+# Por padrão o Web Repl é desativado ao iniciar o ESP, portanto, habilite-o.
+
 WebREPL daemon auto-start status: disabled
 
 Would you like to (E)nable or (D)isable it running on boot?
@@ -88,11 +90,19 @@ Would you like to (E)nable or (D)isable it running on boot?
 
 > E
 
+# É recomendado adicionar uma senha para ser logada no sistema interno.
+
 To enable WebREPL, you must set password for it
 New password: <defina uma senha>
 Confirm password: <repita a senha>
 
+# Após, a conclusão do passo a passo, reinicie o esp-32 para aplicar as alterações.
+
 Changes will be activated after reboot
 Would you like to reboot now? (y/n) y
+
+## Baixando a interface WebRepl
+
+* Baixe o repositório do client web repl neste repositório [Client WebRepl](https://github.com/micropython/webrepl)
 
 
