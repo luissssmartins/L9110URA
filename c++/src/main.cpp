@@ -34,6 +34,10 @@ void setup() {
     request->send(SPIFFS, "/style.css", "style.css");
   });
 
+  server.on("/newura.png", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/newura.png", "image/png");
+  });
+
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
 
     robot.forward(255);
@@ -79,7 +83,7 @@ void setup() {
 
     request->send(SPIFFS, "/index.html", String(), false);
   });
-  
+
   server.begin();
 }
 
