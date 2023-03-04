@@ -1,0 +1,68 @@
+from motor.DCMotor import DCMotor
+
+import time
+
+class L9110URA(DCMotor):
+
+    def __init__(self, pinLeft1, pinLeft2, pinRight1, pinRight2):
+        self.name = 'L9110URA'
+        self.parameter1 = 0
+        self.parameter2 = 0
+        self.speedBaseRight = 1000
+        self.speedBaseLeft = 1000
+        self.maximumAllowedCmdTime = 5000
+
+        self.leftMotor = DCMotor(pinLeft1, pinLeft2)
+        self.rightMotor = DCMotor(pinRight1, pinRight2)
+    
+    def setSpeed(self, _sl, _sr):
+        self.speedBaseLeft = _sl
+        self.speedBaseRight = _sr
+    
+    def configuration(self, leftWay, leftPower, rightWay, rightPower):
+        self.leftMotor.way(leftWay)
+        self.leftMotor.power(leftPower)
+
+        self.rightMotor.way(rightWay)
+        self.rightMotor.power(rightPower)
+
+    
+    def motors(self, speedLeft, speedRight):
+        directionRight = 1
+        directionLeft = 1
+
+        customLeftSpeed = self.speedBaseLeft - speedLeft
+        customRightSpeed = self.speedBaseRight - speedRight
+
+        if speedLeft <= 0:
+            directionRight = 0
+            customLeftSpeed = -speedLeft
+        elif speedRight <= 0:
+            directionLeft = 0
+            customRightSpeed = -speedRight
+        
+        self.configuration(directionRight, customLeftSpeed, directionLeft, customRightSpeed)
+    
+    def moveFront(self, vel = 1000):
+
+        if (vel > 1000):
+            vel = 1000
+        
+        self.configuration(1, 1000 - vel, 1000 - vel)
+    
+    def moveReverse(self, vel = 1000):
+        self.configuration(0, vel, 0, vel)
+    
+    def moveLeft(self):
+        self.configuration(0, self.speedBaseLeft, 1, 0)
+    
+    def moveRight(self):
+        self.configuration(1, 0, 0, self.speedBaseRight)
+    
+    def stop(self):
+        self.configuration(0, 0, 0, 0)
+    
+    
+    
+
+    
