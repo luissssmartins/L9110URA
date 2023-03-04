@@ -1,36 +1,32 @@
 
+/* Corpo do Estilo */
+
 body {
     height: 100vh;
     width: 100vw;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 1em;
+}
+
+/* Seção responsável pela Imagem */
+
+.image-logo {
+    position: fixed;
+    top: 2rem;
+    left: 45%;
 }
 
 .logo {
     width: 8rem;
     height: 6rem;
-    grid-row: 2;
-    grid-column: 2;
 }
 
-.image-logo {
-    grid-row: 1;
-    grid-column: 2;
-    width: 10em;
-    height: 10em;
-    padding: 0 4em;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
+/* Seção responsável pelos botões */
 
-
+/* Posicionamento */
 
 .control-Buttons {
-    grid-row: 2;
-    grid-column: 2;
+    position: fixed;
+    top: 15rem;
+    left: 35.5%;
     width: 18rem;
     height: 18rem;
     display: grid;
@@ -38,29 +34,6 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
     row-gap: 1em;
     column-gap: 1em;
-}
-
-button {
-    border: none;
-    background-color: #eee;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-a {
-    position: relative ;
-    left: -6em;
-    padding: .73em;
-    margin: 0;
-    border: none;
-    text-decoration: none;
-
-}
-
-.btns {
-    padding: 1em 1.2em;
-    text-align: center;
-
 }
 
 .front {
@@ -88,8 +61,49 @@ a {
     grid-row: 3;
 }
 
-button:active {
+/* Estilo */
+
+.btns {
+    padding: 1em 1.2em;
+    text-align: center;
+    border: none;
+    background-color: #eee;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+a {
+    margin: 0;
+    border: none;
+    text-decoration: none;
+}
+
+.btns:active {
     background-color: #ccc; 
 }
+
+/* Padronizando o tamanho dos botões */
+
+.frontb {
+    padding: 1em 1.3em;
+}
+
+.stopb {
+    padding: 1em 1.5em;
+}
+
+.backb {
+    padding: 1em 1.75em;
+}
+
+.leftb {
+    padding: 1em .6em;
+}
+
+.rightb {
+    padding: 1em 1.3em;
+}
+
+
 
 
