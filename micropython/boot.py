@@ -1,6 +1,7 @@
 # URA
 from mqtt.umqttsimple import MQTTClient
 from sensors.hcsr04 import HCSR04
+from robot.robotcar import L9110URA
 
 import ubinascii, machine, network, esp, gc, webrepl
 import time, json
@@ -25,6 +26,9 @@ topic_sub = bytes(config['topic_sub'], 'utf-8')
 topic_pub = bytes(config['topic_pub'], 'utf-8')
 
 distSensor = HCSR04(trigger_pin=19, echo_pin=18)
+
+robot = L9110URA(13, 12, 5, 23)
+robot.setSpeed(1000, 1000)
 
 last_message = 0
 message_interval = 1
