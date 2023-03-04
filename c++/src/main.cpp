@@ -27,16 +27,12 @@ void setup() {
   Serial.println(WiFi.softAPIP());
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(SPIFFS, "/index.html", String(), false);
+    request->send(SPIFFS, "/index.html", "text/html", false);   
   });
 
   server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/style.css", "style.css");
   });
-
-  server.on("/newura.png", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(SPIFFS, "newura.png", String(), false);
-  }); 
 
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
 
@@ -83,7 +79,7 @@ void setup() {
 
     request->send(SPIFFS, "/index.html", String(), false);
   });
-
+  
   server.begin();
 }
 
