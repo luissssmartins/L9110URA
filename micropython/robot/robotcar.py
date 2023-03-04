@@ -43,26 +43,51 @@ class L9110URA(DCMotor):
         
         self.configuration(directionRight, customLeftSpeed, directionLeft, customRightSpeed)
     
-    def moveFront(self, vel = 1000):
+    def front(self, vel = 1000):
 
         if (vel > 1000):
             vel = 1000
         
         self.configuration(1, 1000 - vel, 1000 - vel)
     
-    def moveReverse(self, vel = 1000):
+    def reverse(self, vel = 1000):
         self.configuration(0, vel, 0, vel)
     
-    def moveLeft(self):
+    def left(self):
         self.configuration(0, self.speedBaseLeft, 1, 0)
     
-    def moveRight(self):
+    def right(self):
         self.configuration(1, 0, 0, self.speedBaseRight)
     
     def stop(self):
         self.configuration(0, 0, 0, 0)
     
+    def timer(self, _t):
+
+        if (_t > self.maximumAllowedCmdTime):
+            time.sleep_ms(self.maximumAllowedCmdTime)
+        else:
+            time.sleep_ms(_t)
+        
+        self.configuration(0, 0, 0, 0)
     
+    def moveFront(self, time = 300):
+        self.configuration(1, 0, 1, 0)
+        self.timer(time)
+    
+    def moveReverse(self, time = 300):
+        self.configuration(0, self.speedBaseLeft, 0, self.speedBaseRight)
+        self.timer(time)
+    
+    def moveLeft(self, time = 150):
+        self.configuration(0, self.speedBaseLeft, 1, 0)
+        self.timer(time)
+    
+    def moveRight(self, time = 150):
+        self.configuration(1, 0, 0, self.speedBaseRight)
+        self.timer(time)
+    
+
     
 
     
