@@ -1,46 +1,82 @@
 #include "L9110H.h"
 
-L9110H::L9110H(int pA_1A, int pA_1B, int pB_1A, int pB_1B){
-    pinAPWM = pA_1A;
-    pinBPWM = pB_1A;
-    pinADir = pA_1B;
-    pinBDir = pB_1B;
+#include <Arduino.h>
+
+L9110H::L9110H() {
+    pinMode(pinA, OUTPUT);
+    pinMode(pinB, OUTPUT);
 }
 
-void L9110H::setup() {
-    pinMode(pinAPWM, OUTPUT);
-    pinMode(pinADir, OUTPUT);
-    pinMode(pinBPWM, OUTPUT);
-    pinMode(pinBDir, OUTPUT);
+void L9110H::motor(int motorNumber, String command, int speed) {
 
-    digitalWrite(pinAPWM, LOW);
-    digitalWrite(pinADir, LOW);
-    digitalWrite(pinBPWM, LOW);
-    digitalWrite(pinBDir, LOW);
-}
+    switch (motorNumber) {
 
-void L9110H::setSpeedA(int i, int pwm) {
-    digitalWrite(pinADir, i);
-    
-    analogWrite(pinAPWM, 255 - pwm);
-}
+        case 1: {
+            pinA = 13;
+            pinB = 12;
+            break;
+        }
 
-void L9110H::setSpeedB(int i, int pwm) {
-    digitalWrite(pinBDir, i);
+        case 2: {
+            pinA = 5;
+            pinB = 23;
+            break;
+        }
 
-    if (i) {
-        analogWrite(pinBPWM, 255 - pwm);
-    } else {
-        analogWrite(pinBPWM, pwm);
+        default: {
+            break;
+        }
+    }
+
+    if (command == "A") {
+        analogWrite(pinB, 1);
+        analogWrite(pinA, speed);
+    } else if (command == "B") {
+        analogWrite(pinA, 1);
+        analogWrite(pinB, speed);
+    } else if (command = "STOP") {
+        analogWrite(pinA, 0);
+        analogWrite(pinB, 0);
     }
 }
 
-void L9110H::stopMotorA() {
-    digitalWrite(pinADir, LOW);
-    digitalWrite(pinAPWM, LOW);
+void L9110H::forward(int i) {
+    motor(1, "B", i);
+    motor(2, "A", i);
+
+    delay(300);
+
+    stop();
 }
 
-void L9110H::stopMotorB() {
-    digitalWrite(pinBDir, LOW);
-    digitalWrite(pinBPWM, LOW);
+void L9110H::backward(int i) {
+    motor(1, "A", i);
+    motor(2, "B", i);
+
+    delay(300);
+
+    stop();
+}
+
+void L9110H::right(int i) {
+    motor(1, "B", i);
+    motor(2, "B", i);
+
+    delay(300);
+
+    stop();
+}
+
+void L9110H::left(int i) {
+    motor(1, "A", i);
+    motor(2, "A", i);
+
+    delay (300);
+
+    stop();
+}
+
+void L9110H::stop() {
+    motor(1, "STOP", 0);
+    motor(2, "STOP", 0);
 }
