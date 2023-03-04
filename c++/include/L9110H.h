@@ -7,24 +7,24 @@
 class L9110H {
     
     public:
-      L9110H(int pA_1A, int pA_1B, int pB_1A, int pB_1B);
-      
-      void setup();
+      L9110H();
 
-      void setSpeedA(int i, int pwm);
+      void motor(int motorNumber, String command, int speed);
 
-      void setSpeedB(int i, int pwm);
+      void forward(int i);
 
-      void stopMotorA();
-      
-      void stopMotorB();
+      void backward(int i);
+
+      void right(int i);
+
+      void left(int i);
+
+      void stop();
 
     private:
 
-    int pinAPWM;
-    int pinADir;
-    int pinBPWM;
-    int pinBDir;
+    int pinA;
+    int pinB;
 };
 
 #endif
