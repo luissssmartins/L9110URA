@@ -103,8 +103,8 @@ Would you like to reboot now? (y/n) y
 
 ```
 
-## Baixando a interface WebRepl
+## Baixando a interface Web Repl
 
-* Baixe o repositório do client web repl neste repositório [Client WebRepl](https://github.com/micropython/webrepl)
+* Baixe o repositório do client web repl neste repositório [Web Repl Web Interface](https://github.com/micropython/webrepl)
 
 
