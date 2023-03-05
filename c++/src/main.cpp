@@ -27,7 +27,7 @@ void setup() {
   Serial.println(WiFi.softAPIP());
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(SPIFFS, "/index.html", "text/html", false);   
+    request->send(SPIFFS, "/index.html");   
   });
 
   server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -38,13 +38,24 @@ void setup() {
     request->send(SPIFFS, "/newura.png", "image/png");
   });
 
+  // server.on("/action", HTTP_POST, [](AsyncWebServerRequest *request) {
+  //   String input = request->arg("input-text");
+
+  //   if (input == "FRT") {
+  //     robot.forward(255);
+  //     request->send(200);
+  //   }
+
+  //   //request->send(200);
+  // });
+
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
 
     robot.forward(255);
 
     Serial.println("command frt");
 
-    request->send(SPIFFS, "/index.html", String(), false);
+    request->send(SPIFFS, "/index.html");
   });
 
   server.on("/trs", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -53,7 +64,7 @@ void setup() {
 
     Serial.println("command trs");
 
-    request->send(SPIFFS, "/index.html", String(), false);
+    request->send(SPIFFS, "/index.html");
   });
 
    server.on("/esq", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -62,7 +73,7 @@ void setup() {
 
     Serial.println("command esq");
 
-    request->send(SPIFFS, "/index.html", String(), false);
+    request->send(SPIFFS, "/index.html");
   });
 
    server.on("/drt", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -71,7 +82,7 @@ void setup() {
 
     Serial.println("command drt");
 
-    request->send(SPIFFS, "/index.html", String(), false);
+    request->send(SPIFFS, "/index.html");
   });
   
 
@@ -81,7 +92,7 @@ void setup() {
 
     Serial.println("command stop");
 
-    request->send(SPIFFS, "/index.html", String(), false);
+    request->send(SPIFFS, "/index.html");
   });
 
   server.begin();
