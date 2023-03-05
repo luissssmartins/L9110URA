@@ -22,6 +22,35 @@
             <li class="back"><a href="/trs"><button class="btns backb">Trás</button></a></li>
         </ul>
 
+        <form id="action">
+            <label for="input-text">Digite algo:</label>
+            <input type="text" id="input-text" name="input-text">
+            <button type="submit">Enviar</button>
+        </form>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(function() {
+              $("#action").submit(function(event) {
+                event.preventDefault(); // evita que a página seja atualizada
+          
+                var inputData = $("input[name='input-text']").val(); // obtém o valor do campo de entrada
+                $.ajax({
+                  type: "POST",
+                  url: "/action", // o URL do endpoint que receberá os dados do formulário
+                  data: { input: inputData },
+                  success: function() {
+                    alert("Dados enviados com sucesso!");
+                  },
+                  error: function() {
+                    alert("Erro ao enviar dados");
+                  }
+                });
+              });
+            });
+        </script>
+          
+
         <script type="text/javascript" src="scripts/script.js"></script>
     </body>
 </html>

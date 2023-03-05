@@ -19,7 +19,7 @@ body {
     height: 6rem;
 }
 
-/* Retirando estilo da lista */
+/* Retirando o estilo da lista */
 
 ul {
     list-style: none;
@@ -31,7 +31,7 @@ ul {
 
 .control-Buttons {
     position: fixed;
-    top: 15rem;
+    top: 12rem;
     left: 35.5%;
     width: 18rem;
     height: 18rem;
@@ -110,6 +110,43 @@ a {
     padding: 1em 1.3em;
 }
 
+/* Seção responsável pela entrada manual de comandos */
+
+form {
+    position: fixed;
+    top: calc(100vh - 25vh);
+    left: 38%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+label, input, button {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
 
 
 
