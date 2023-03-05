@@ -4,6 +4,7 @@
 #include "L9110H.h"
 #include "ESPAsyncWebServer.h"
 #include "SPIFFS.h"
+#include "AsyncTCP.h"
 
 const char* ssid = "URA TESTE";
 const char* password = "12345678";
@@ -41,24 +42,13 @@ void setup() {
     request->send(SPIFFS, "/newura.png", "image/png");
   });
 
-  // server.on("/action", HTTP_POST, [](AsyncWebServerRequest *request) {
-  //   String input = request->arg("input-text");
-
-  //   if (input == "FRT") {
-  //     robot.forward(255);
-  //     request->send(200);
-  //   }
-
-  //   //request->send(200);
-  // });
-  
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
 
     robot.forward(255);
 
     Serial.println("command frt");
-
-    request->send(SPIFFS, "/index.html");
+    
+    request->send(204);
   });
 
   server.on("/trs", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -67,7 +57,7 @@ void setup() {
 
     Serial.println("command trs");
 
-    request->send(SPIFFS, "/index.html");
+    request->send(204);
   });
 
    server.on("/esq", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -76,7 +66,7 @@ void setup() {
 
     Serial.println("command esq");
 
-    request->send(SPIFFS, "/index.html");
+    request->send(204);
   });
 
    server.on("/drt", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -85,7 +75,7 @@ void setup() {
 
     Serial.println("command drt");
 
-    request->send(SPIFFS, "/index.html");
+    request->send(204);
   });
   
 
@@ -95,7 +85,7 @@ void setup() {
 
     Serial.println("command stop");
 
-    request->send(SPIFFS, "/index.html");
+    request->send(204);
   });
 
   server.begin();
