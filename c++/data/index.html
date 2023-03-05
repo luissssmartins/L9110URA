@@ -15,12 +15,21 @@
             <img class="logo" src="newura.png" alt="Logo do Projeto Educacional URA">
         </div>
         <ul class="control-Buttons">
-            <li class="front"><a href="/frt"><button class="btns frontb">Frente</button></a></li>
-            <li class="left"><a href="/esq"><button class="btns leftb">Esquerda</button></a></li>
-            <li class="stop"><a href="/stop"><button class="btns stopb">Parar</button></a></li>
-            <li class="right"><a href="/drt"><button class="btns rightb">Direita</button></a></li>
-            <li class="back"><a href="/trs"><button class="btns backb">Trás</button></a></li>
+            <li class="front"><button class="btns frontb" onclick="move('/frt');">Frente</button></li>
+            <li class="left"><button class="btns leftb" onclick="move('/esq');">Esquerda</button></li>
+            <li class="stop"><button class="btns stopb" onclick="move('/stop');">Parar</button></li>
+            <li class="right"><button class="btns rightb" onclick="move('/drt');">Direita</button></li>
+            <li class="back"><button class="btns backb" onclick="move('/trs');">Trás</button></li>
         </ul>
+
+        <script>
+          function move(where) {
+            var xhttp = new XMLHttpRequest();
+
+            xhttp.open("GET", where, true);
+            xhttp.send();
+          }
+        </script>
 
         <form id="action">
             <label for="input-text">Digite algo:</label>
@@ -49,8 +58,6 @@
               });
             });
         </script>
-          
-
         <script type="text/javascript" src="scripts/script.js"></script>
     </body>
 </html>
