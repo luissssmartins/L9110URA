@@ -19,6 +19,12 @@ body {
     height: 6rem;
 }
 
+/* Retirando estilo da lista */
+
+ul {
+    list-style: none;
+}
+
 /* Seção responsável pelos botões */
 
 /* Posicionamento */
