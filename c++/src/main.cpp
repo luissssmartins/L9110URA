@@ -1,13 +1,11 @@
 #include <Arduino.h>
 #include <SimpleFTPServer.h>
+#include <ArduinoJson.h>
 
 #include "L9110H.h"
 #include "ESPAsyncWebServer.h"
 #include "SPIFFS.h"
 #include "AsyncTCP.h"
-
-const char* ssid = "URA TESTE";
-const char* password = "12345678";
 
 String command;
 
@@ -17,6 +15,8 @@ AsyncWebServer server(80);
 
 FtpServer ftpSrv;
 
+StaticJsonDocument<200> document;
+
 void setup() {
   Serial.begin(115200);
 
@@ -25,7 +25,24 @@ void setup() {
     return;
   }
 
-  WiFi.softAP(ssid, password);
+  File configFile = SPIFFS.open("/config.json", "r");
+
+  if (!configFile) {
+    Serial.println("Can't read config.json, please restart and try again.");
+    return;
+  }
+
+  DeserializationError error = deserializeJson(document, configFile);
+
+  if (error) {
+    Serial.println(error.f_str());
+    return;
+  }
+
+  const char* SSID = document["ssid"];
+  const char* PASSWORD = document["password"];
+
+  WiFi.softAP(SSID, PASSWORD);
 
   Serial.println("WiFi AP started!");
   Serial.println(WiFi.softAPIP());
