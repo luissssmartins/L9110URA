@@ -29,43 +29,6 @@ Atualmente há duas versões do projeto disponível, veja abaixo:
 * Programação: possui intuito de realizar uma sequência de comandos separados por ponto e vírgula ';'. Para se iniciar uma programação requer
 a primeira instrução dada por 'PRG';
 
-## Configuração de todos os pinos referentes ao GPIO
-
-### Ponte H 
-
-| Ponte H L9110  | ESP32 |
-| --------------- | --------------- | 
-| B-1A | D5 |
-| B-1B | D23 |
-| G  | GND  | 
-| VCC | Vin (5v) | 
-| A-1A | D13 | 
-| A-1B | D12 | 
-
-### Sensor de distância (Ultrassônico) 
-
-| Sensor de distância | ESP32 |
-| --------------- | --------------- | 
-| GND | GND  | 
-| Trig  | D19 | 
-| Echo  | D18 |
-| Vcc | 3.3v | 
-
-### Sensores de linha 
-
-| Sensor de Linha Esquerdo | ESP32 |
-| --------------- | --------------- | 
-| G  | GND  | 
-| V+ | 3.3v | 
-| S  | D14 | 
-
-
-| Sensor de Linha Direito | ESP32 |
-| --------------- | --------------- | 
-| G  | GND  | 
-| V+ | 3.3v | 
-| S  | D27 |
-
 ## Configuração dentro do MCU
 
 ```bash
@@ -126,4 +89,100 @@ Would you like to reboot now? (y/n) y
 
 * Após isso basta se logar com a senha criada no WebREPL e acessar remotamente seu ESP-32.
 
+## Entendendo e configurando a versão em C++:
 
+### Preparando o ambiente
+
+* Baixe a extensão do [PlatformIO](https://platformio.org/install/ide?install=vscode) em seu VS Code.
+
+* Após instalar, clone esse projeto e abra-o no VS Code com a extensão do PlatformIO:
+
+![3](https://github.com/luissssmartins/L9110URA/blob/main/images/platformio_1.png)
+
+* Abrindo o projeto, certifique-se que há o arquivo "platformio.ini", nele contém as dependências do projeto:
+
+![4](https://github.com/luissssmartins/L9110URA/blob/main/images/platformio_2.png)
+
+### Criando uma imagem personalizada para o ESP-32
+    
+![5](https://github.com/luissssmartins/L9110URA/blob/main/images/platformio_3.png)
+
+* Após o download automático das dependências do projeto, acesse a parte da extensão do PlatformIO, abra a pasta "esp32dev", abra a sub-pasta "Platform", e aperte em "Erase Flash".
+
+* Após ter limpado a memória interna de seu ESP-32, aperte em "Build Filesystem Image", construindo o arquivo de firmware personalizado.
+
+* Depois de ter concluído os dois passos acima, aperte em "Upload Filesystem Image", isso fará com que a imagem que foi construída seja enviada ao ESP-32.
+ 
+![6](https://github.com/luissssmartins/L9110URA/blob/main/images/platformio_4.png)
+
+### Configuração dentro do MCU (SPIFFS)
+
+```bash
+{
+    "ssid": "URA000",
+    "password": "PASSWORD"
+}
+```
+
+### Compilando o projeto
+
+* Para compilar o projeto, primeiramente é necessário apertar em "build", veja no canto inferior a opção de build:
+
+![7](https://github.com/luissssmartins/L9110URA/blob/main/images/platformio_5.png)
+
+* Logo após ter realizado o build do projeto, vamos enviá-lo ao ESP-32:
+
+![8](https://github.com/luissssmartins/L9110URA/blob/main/images/platformio_6.png)
+
+* Depois de ter concluído os dois passos acima, se conecte a rede Wi-Fi que foi gerada baseada na configuração realizada anteriormente.
+
+* Abrindo qualquer navegador, insira o endereço de IP **192.168.4.1** na barra de navegação, essa deverá ser o site acessado:
+
+![9](https://github.com/luissssmartins/L9110URA/blob/main/images/ura-control.png)
+
+### Comandos básicos
+
+* Botão "Frente": anda para frente;
+* Botão "Trás": anda para trás;
+* Botão "Direita": vira para direita em torno de seu próprio eixo;
+* Botão "Esquerda": vira para a esquerda em torno de seu próprio eixo;
+* Botão "Parar": interrompe qualquer sequência de comandos clicados, fazendo o robô parar;
+
+![10](https://github.com/luissssmartins/L9110URA/blob/main/images/ura-commands.png)
+ 
+## Configuração de todos os pinos referentes ao GPIO
+
+### Ponte H 
+
+| Ponte H L9110  | ESP32 |
+| --------------- | --------------- | 
+| B-1A | D5 |
+| B-1B | D23 |
+| G  | GND  | 
+| VCC | Vin (5v) | 
+| A-1A | D13 | 
+| A-1B | D12 | 
+
+### Sensor de distância (Ultrassônico) 
+
+| Sensor de distância | ESP32 |
+| --------------- | --------------- | 
+| GND | GND  | 
+| Trig  | D19 | 
+| Echo  | D18 |
+| Vcc | 3.3v | 
+
+### Sensores de linha 
+
+| Sensor de Linha Esquerdo | ESP32 |
+| --------------- | --------------- | 
+| G  | GND  | 
+| V+ | 3.3v | 
+| S  | D14 | 
+
+
+| Sensor de Linha Direito | ESP32 |
+| --------------- | --------------- | 
+| G  | GND  | 
+| V+ | 3.3v | 
+| S  | D27 |
