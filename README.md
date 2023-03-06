@@ -2,7 +2,16 @@
 
 ![1](https://raw.githubusercontent.com/luissssmartins/L9110URA/main/images/L9110URA.jpg)
 
-## Comandos básicos
+## Versões disponíveis
+
+Atualmente há duas versões do projeto disponível, veja abaixo:
+
+* [C++](https://github.com/luissssmartins/L9110URA/tree/main/c%2B%2B)
+* [MicroPython](https://github.com/luissssmartins/L9110URA/tree/main/micropython)
+
+## Entendendo e configurando a versão em MicroPython:
+
+### Comandos básicos
 
 * FRT: anda para frente;
 * TRS: anda para trás;
@@ -14,7 +23,7 @@
 * DRT: anda para direita durante um X tempo determinado em torno de seu próprio eixo;
 * EST: anda para esquerda durante um X tempo determinado em torno de seu próprio eixo;
 
-## Comandos avançados:
+### Comandos avançados:
 
 * MTP: ajusta a "potência" de ambos os motores entre valores -100 (mais lento) à 100 (mais rápido);
 * Programação: possui intuito de realizar uma sequência de comandos separados por ponto e vírgula ';'. Para se iniciar uma programação requer
@@ -73,7 +82,7 @@ a primeira instrução dada por 'PRG';
 
 ```
 
-## Configuração do Web Repl
+### Configuração do Web Repl
 
 ```bash
 
@@ -103,8 +112,18 @@ Would you like to reboot now? (y/n) y
 
 ```
 
-## Baixando a interface Web Repl
+### Baixando a interface Web Repl
 
 * Baixe o repositório do client web repl neste repositório [Web Repl Web Interface](https://github.com/micropython/webrepl)
+
+### Acessando o ESP-32 de forma remota:
+
+* Após baixar e abrir o client web repl, essa será sua tela inicial:
+
+![2](https://github.com/luissssmartins/L9110URA/blob/main/images/webrepl.png)
+
+* No campo ws://<IP>, insira o IP no qual seu ESP-32 está conectado, seja em rede local ou em uma rede wi-fi.
+
+* Após isso basta se logar com a senha criada no WebREPL e acessar remotamente seu ESP-32.
 
 
