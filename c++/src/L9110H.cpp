@@ -40,40 +40,46 @@ void L9110H::motor(int motorNumber, String instruction, int speed) {
     }
 }
 
-void L9110H::forward(int i) {
+void L9110H::forward(int i, int seconds, bool hasStop) {
     motor(1, "BACKWARD", i);
     motor(2, "FORWARD", i);
 
-    delay(300);
-
-    stop();
+    if (hasStop) {
+        stop();
+    }
 }
 
-void L9110H::backward(int i) {
+void L9110H::backward(int i, int seconds, bool hasStop) {
     motor(1, "FORWARD", i);
     motor(2, "BACKWARD", i);
 
-    delay(300);
+    delay(seconds);
 
-    stop();
+    if (hasStop) {
+        stop();
+    }
 }
 
-void L9110H::right(int i) {
+void L9110H::right(int i, int seconds, bool hasStop) {
     motor(1, "BACKWARD", i);
     motor(2, "BACKWARD", i);
 
-    delay(300);
+    delay(seconds);
 
-    stop();
+    if (hasStop) {
+        stop();
+    }
 }
 
-void L9110H::left(int i) {
+void L9110H::left(int i, int seconds, bool hasStop) {
     motor(1, "FORWARD", i);
     motor(2, "FORWARD", i);
 
-    delay(300);
+    delay(seconds);
 
-    stop();
+    if (hasStop) {
+        stop();
+    }
 }
 
 void L9110H::stop() {
