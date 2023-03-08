@@ -61,7 +61,7 @@ void setup() {
 
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
 
-    robot.forward(255);
+    robot.forward(255, 300, true);
 
     Serial.println("command frt");
     
@@ -70,7 +70,7 @@ void setup() {
 
   server.on("/trs", HTTP_GET, [](AsyncWebServerRequest *request) {
 
-    robot.backward(255);
+    robot.backward(255, 300, true);
 
     Serial.println("command trs");
 
@@ -79,7 +79,7 @@ void setup() {
 
    server.on("/esq", HTTP_GET, [](AsyncWebServerRequest *request) {
 
-    robot.left(255);
+    robot.left(255, 300, true);
 
     Serial.println("command esq");
 
@@ -88,7 +88,7 @@ void setup() {
 
    server.on("/drt", HTTP_GET, [](AsyncWebServerRequest *request) {
 
-    robot.right(255);
+    robot.right(255, 300, true);
 
     Serial.println("command drt");
 
