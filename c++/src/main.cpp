@@ -105,6 +105,49 @@ void setup() {
     request->send(204);
   });
 
+  server.on("/action", HTTP_GET, [](AsyncWebServerRequest *request) {
+
+    if (request->hasParam("input-text")) {
+
+      String action = request->getParam("input-text")->value();
+
+      if (action == "quadrado") {
+
+        robot.forward(255, 2000, true);
+
+        delay(2000);
+
+        robot.right(255, 300, true);
+
+        delay(2000);
+
+        robot.forward(255, 2000, true);
+
+        delay(2000);
+
+        robot.right(255, 300, true);
+
+        delay(2000);
+
+        robot.forward(255, 2000, true);
+
+        delay(2000);
+
+        robot.right(255, 300, true);
+
+        delay(2000);
+
+        robot.forward(255, 2000, true);
+
+        delay(2000);
+
+        robot.stop();
+      }
+
+      request->send(204);
+    }
+  });
+
   server.begin();
 
   ftpSrv.begin("ura", "l9110ura");
