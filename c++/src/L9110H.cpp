@@ -44,6 +44,8 @@ void L9110H::forward(int i, int seconds, bool hasStop) {
     motor(1, "BACKWARD", i);
     motor(2, "FORWARD", i);
 
+    delay(seconds);
+
     if (hasStop) {
         stop();
     }
