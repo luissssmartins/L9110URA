@@ -186,3 +186,7 @@ Would you like to reboot now? (y/n) y
 | G  | GND  | 
 | V+ | 3.3v | 
 | S  | D27 |
+
+### Repositório do URA no Natalnet
+
+![Acesse aqui](https://github.com/Natalnet/ura-codes/)
