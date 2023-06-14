@@ -107,11 +107,11 @@ void setup() {
 
   server.on("/action", HTTP_GET, [](AsyncWebServerRequest *request) {
 
-    if (request->hasParam("input-text")) {
+    if (request->hasParam("action")) {
 
       request->send(204);
 
-      String action = request->getParam("input-text")->value();
+      String action = request->getParam("action")->value();
 
       if (action == "quadrado") {
 
