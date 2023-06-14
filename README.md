@@ -2,6 +2,12 @@
 
 ![1](https://raw.githubusercontent.com/luissssmartins/L9110URA/main/images/L9110URA.jpg)
 
+## Repositório do URA
+
+Também existem outras versões disponíveis
+
+* [Natalnet](https://github.com/Natalnet/ura-codes/)
+
 ## Versões disponíveis
 
 Atualmente há duas versões do projeto disponível, veja abaixo:
