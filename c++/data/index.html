@@ -33,7 +33,7 @@
 
         <form id="action" action="/action">
             <label for="input-text">Digite algo:</label>
-            <input type="text" id="input-text" name="input-text">
+            <input type="text" id="action" name="action">
             <button type="submit">Enviar</button>
         </form>
 
@@ -41,7 +41,7 @@
           $(function() {
             $("/action").submit(function(event) {
               
-              var inputData = $("input[name='input-text']").val();
+              var inputData = $("input[name='action']").val();
               var xhttp = new XHMLHttpRequest();
               
               xhttp.open("GET", inputData, true);
