@@ -55,8 +55,8 @@ void setup() {
     request->send(SPIFFS, "/style.css", "style.css");
   });
 
-  server.on("/newura.png", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/newura.png", "image/png");
+  server.on("/ura.png", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/ura.png", "image/png");
   });
 
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -109,6 +109,8 @@ void setup() {
 
     if (request->hasParam("input-text")) {
 
+      request->send(204);
+
       String action = request->getParam("input-text")->value();
 
       if (action == "quadrado") {
@@ -142,9 +144,8 @@ void setup() {
         delay(2000);
 
         robot.stop();
-      }
 
-      request->send(204);
+      }
     }
   });
 
