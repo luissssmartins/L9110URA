@@ -51,10 +51,42 @@ void setup() {
     request->send(SPIFFS, "/index.html");   
   });
 
+  server.on("/logo.svg", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/logo.svg");
+  });
+
+  server.on("/downbutton.svg", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/downbutton.svg");
+  });
+
+  server.on("/leftbutton.svg", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/leftbutton.svg");
+  });
+
+  server.on("/line.svg", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/line.svg");
+  });
+
+  server.on("/rightbutton.svg", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/rightbutton.svg");
+  });
+
+  server.on("/upbutton.svg", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/upbutton.svg");
+  });
+
+  server.on("/stopbutton.svg", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/stopbutton.svg");
+  });
+
+  server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/script.js");
+  });
+
   server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/style.css", "style.css");
   });
-  
+
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
 
     robot.forward(255, 300, true);
