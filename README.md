@@ -151,11 +151,11 @@ Would you like to reboot now? (y/n) y
 
 ### Comandos básicos
 
-* Botão "Frente": anda para frente;
-* Botão "Trás": anda para trás;
-* Botão "Direita": vira para direita em torno de seu próprio eixo;
-* Botão "Esquerda": vira para a esquerda em torno de seu próprio eixo;
-* Botão "Parar": interrompe qualquer sequência de comandos clicados, fazendo o robô parar;
+* Botão "Frente" (verde): anda para frente;
+* Botão "Trás" (amarelo): anda para trás;
+* Botão "Direita" (azul): vira para direita em torno de seu próprio eixo;
+* Botão "Esquerda" (vermelho): vira para a esquerda em torno de seu próprio eixo;
+* Botão "Parar" (stop): interrompe qualquer sequência de comandos clicados, fazendo o robô parar;
 
 ![10](https://github.com/luissssmartins/L9110URA/blob/main/images/ura-joystick.png)
  
