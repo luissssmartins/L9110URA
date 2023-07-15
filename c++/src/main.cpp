@@ -83,6 +83,10 @@ void setup() {
     request->send(SPIFFS, "/stopbutton.svg");
   });
 
+  server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/favicon.ico");
+  });
+
   server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/script.js");
   });
