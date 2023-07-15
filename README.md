@@ -130,6 +130,9 @@ Would you like to reboot now? (y/n) y
 }
 ```
 
+* Você pode modificar o nome do robô alterando o "ssid" para algum nome que você deseja.
+* A senha não pode ser menor que 6 caracteres por padrão do firmware do microcontrolador.
+
 ### Compilando o projeto
 
 * Para compilar o projeto, primeiramente é necessário apertar em "build", veja no canto inferior a opção de build:
