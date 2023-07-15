@@ -51,6 +51,10 @@ void setup() {
     request->send(SPIFFS, "/index.html");   
   });
 
+  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/style.css");
+  });
+
   server.on("/logo.svg", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/logo.svg");
   });
@@ -81,10 +85,6 @@ void setup() {
 
   server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/script.js");
-  });
-
-  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(SPIFFS, "/style.css", "style.css");
   });
 
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
