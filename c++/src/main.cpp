@@ -54,11 +54,7 @@ void setup() {
   server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/style.css", "style.css");
   });
-
-  server.on("/ura.png", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/ura.png", "image/png");
-  });
-
+  
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
 
     robot.forward(255, 300, true);
