@@ -144,7 +144,7 @@ Would you like to reboot now? (y/n) y
 
 * Abrindo qualquer navegador, insira o endereço de IP **192.168.4.1** na barra de navegação, essa deverá ser o site acessado:
 
-![9](https://github.com/luissssmartins/L9110URA/blob/main/images/ura-control.png)
+![9](https://github.com/luissssmartins/L9110URA/blob/main/images/ura-complete.png)
 
 ### Comandos básicos
 
@@ -154,7 +154,7 @@ Would you like to reboot now? (y/n) y
 * Botão "Esquerda": vira para a esquerda em torno de seu próprio eixo;
 * Botão "Parar": interrompe qualquer sequência de comandos clicados, fazendo o robô parar;
 
-![10](https://github.com/luissssmartins/L9110URA/blob/main/images/ura-commands.png)
+![10](https://github.com/luissssmartins/L9110URA/blob/main/images/ura-joystick.png)
  
 ## Configuração de todos os pinos referentes ao GPIO
 
