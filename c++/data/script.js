@@ -11,7 +11,7 @@ function move(where) {
         
       event.preventDefault();
   
-      var inputData = $("input[name='input-text']").val(); 
+      var inputData = $("input[name='action']").val(); 
 
       $.ajax({
         type: "POST",
