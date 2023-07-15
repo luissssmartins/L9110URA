@@ -51,6 +51,10 @@ void setup() {
     request->send(SPIFFS, "/index.html");   
   });
 
+  server.on("/favicon.png", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/favicon.png", "image/png");
+  });
+
   server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/style.css");
   });
@@ -81,10 +85,6 @@ void setup() {
 
   server.on("/stopbutton.svg", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/stopbutton.svg");
-  });
-
-  server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/favicon.ico");
   });
 
   server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request) {
