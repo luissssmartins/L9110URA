@@ -95,6 +95,8 @@ Would you like to reboot now? (y/n) y
 
 * Após isso basta se logar com a senha criada no WebREPL e acessar remotamente seu ESP-32.
 
+* Depois de conectado e no seu ambiente de desenvolvimento interno, tente executar o arquivo main.py utilizando o seguinte comando: exec(open('main.py').read())
+
 ## Entendendo e configurando a versão em C++:
 
 ### Preparando o ambiente
