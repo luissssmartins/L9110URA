@@ -1,11 +1,14 @@
 #include <Arduino.h>
 #include <SimpleFTPServer.h>
 #include <ArduinoJson.h>
+#include <vector>
 
 #include "L9110H.h"
 #include "ESPAsyncWebServer.h"
 #include "SPIFFS.h"
 #include "AsyncTCP.h"
+
+using namespace std;
 
 String command;
 
@@ -16,6 +19,64 @@ AsyncWebServer server(80);
 FtpServer ftpSrv;
 
 StaticJsonDocument<200> document;
+
+struct Command {
+  String name;
+  String parameter;
+
+  int seconds;
+};
+
+vector<Command> commandList;
+
+void operateCommands() {
+  for (const auto& command : commandList) {
+
+    if (command.name == "forward" || command.name == "frente") {
+      robot.forward(command.parameter.toInt(), command.seconds * 1000, true);
+    } else if (command.name == "backward" || command.name == "tras") {
+      robot.backward(command.parameter.toInt(), command.seconds * 1000, true);
+    } else if (command.name == "left" || command.name == "esquerda") {
+      robot.left(command.parameter.toInt(), command.seconds * 1000, true);
+    } else if (command.name == "right" || command.name == "direita") {
+      robot.right(command.parameter.toInt(), command.seconds * 1000, true);
+    } else if (command.name == "stop" || command.name == "parar") {
+      robot.stop();
+    }
+
+    delay(command.seconds * 1000);
+  }
+
+  commandList.clear();
+}
+
+void parseCommands(String commands) {
+  char b[commands.length() + 1];
+
+  commands.toCharArray(b, commands.length() + 1);
+
+  char* consumer = strtok(b, ";");
+
+  while (consumer != nullptr) {
+    Command command;
+
+    command.name = String(consumer);
+
+    consumer = strtok(nullptr, ";");
+    if (consumer != nullptr) {
+      command.parameter = String(consumer);
+    }
+
+    consumer = strtok(nullptr, ";");
+    if (consumer != nullptr) {
+      command.seconds = atoi(consumer);
+    }
+
+    commandList.push_back(command);
+
+    consumer = strtok(nullptr, ";");
+  }
+}
 
 void setup() {
   Serial.begin(115200);
@@ -37,6 +98,10 @@ void setup() {
   if (error) {
     Serial.println(error.f_str());
     return;
+  }
+
+  if (commandList.size() > 0) {
+    commandList.clear();
   }
 
   const char* SSID = document["ssid"];
@@ -92,47 +157,32 @@ void setup() {
   });
 
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
+    robot.forward(255, 150, true);    
 
-    robot.forward(255, 150, true);
-
-    Serial.println("command frt");
-    
     request->send(204);
   });
 
   server.on("/trs", HTTP_GET, [](AsyncWebServerRequest *request) {
-
     robot.backward(255, 150, true);
-
-    Serial.println("command trs");
 
     request->send(204);
   });
 
    server.on("/esq", HTTP_GET, [](AsyncWebServerRequest *request) {
-
     robot.left(255, 150, true);
-
-    Serial.println("command esq");
 
     request->send(204);
   });
 
    server.on("/drt", HTTP_GET, [](AsyncWebServerRequest *request) {
-
     robot.right(255, 150, true);
-
-    Serial.println("command drt");
 
     request->send(204);
   });
   
 
   server.on("/stop", HTTP_GET, [](AsyncWebServerRequest* request) {
-
     robot.stop();
-
-    Serial.println("command stop");
 
     request->send(204);
   });
@@ -140,44 +190,12 @@ void setup() {
   server.on("/action", HTTP_GET, [](AsyncWebServerRequest *request) {
 
     if (request->hasParam("action")) {
+      String action = request->getParam("action")->value();
 
       request->send(204);
 
-      String action = request->getParam("action")->value();
-
-      if (action == "quadrado") {
-
-        robot.forward(255, 2000, true);
-
-        delay(2000);
-
-        robot.right(255, 300, true);
-
-        delay(2000);
-
-        robot.forward(255, 2000, true);
-
-        delay(2000);
-
-        robot.right(255, 300, true);
-
-        delay(2000);
-
-        robot.forward(255, 2000, true);
-
-        delay(2000);
-
-        robot.right(255, 300, true);
-
-        delay(2000);
-
-        robot.forward(255, 2000, true);
-
-        delay(2000);
-
-        robot.stop();
-
-      }
+      parseCommands(action);
+      operateCommands();
     }
   });
 
