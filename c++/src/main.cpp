@@ -22,7 +22,6 @@ StaticJsonDocument<200> document;
 
 struct Command {
   String name;
-  String parameter;
 
   int seconds;
 };
@@ -33,13 +32,13 @@ void operateCommands() {
   for (const auto& command : commandList) {
 
     if (command.name == "forward" || command.name == "frente") {
-      robot.forward(command.parameter.toInt(), command.seconds * 1000, true);
+      robot.forward(255, command.seconds * 1000, true);
     } else if (command.name == "backward" || command.name == "tras") {
-      robot.backward(command.parameter.toInt(), command.seconds * 1000, true);
+      robot.backward(255, command.seconds * 1000, true);
     } else if (command.name == "left" || command.name == "esquerda") {
-      robot.left(command.parameter.toInt(), command.seconds * 1000, true);
+      robot.left(255, command.seconds * 1000, true);
     } else if (command.name == "right" || command.name == "direita") {
-      robot.right(command.parameter.toInt(), command.seconds * 1000, true);
+      robot.right(255, command.seconds * 1000, true);
     } else if (command.name == "stop" || command.name == "parar") {
       robot.stop();
     }
@@ -61,12 +60,7 @@ void parseCommands(String commands) {
     Command command;
 
     command.name = String(consumer);
-
-    consumer = strtok(nullptr, ";");
-    if (consumer != nullptr) {
-      command.parameter = String(consumer);
-    }
-
+    
     consumer = strtok(nullptr, ";");
     if (consumer != nullptr) {
       command.seconds = atoi(consumer);
