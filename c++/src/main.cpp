@@ -28,50 +28,68 @@ struct Command {
 
 vector<Command> commandList;
 
-void operateCommands() {
-  for (const auto& command : commandList) {
-    Serial.println("recebi comando");
-    Serial.println("Comando nome:");
-    Serial.println(command.name);
+unsigned long previousMillis = 0;
+bool isRunning = false;
 
-    if (command.name == "forward" || command.name == "frente") {
-      robot.forward(255, command.seconds * 1000, true);
-    } else if (command.name == "backward" || command.name == "tras") {
-      robot.backward(255, command.seconds * 1000, true);
-    } else if (command.name == "left" || command.name == "esquerda") {
-      robot.left(255, command.seconds * 1000, true);
-    } else if (command.name == "right" || command.name == "direita") {
-      robot.right(255, command.seconds * 1000, true);
-    } else if (command.name == "stop" || command.name == "parar") {
-      robot.stop();
+size_t currentCommandIndex = 0;
+
+void operateCommands() {
+    if (isRunning && currentCommandIndex < commandList.size()) {
+
+        unsigned long currentMillis = millis();
+        
+        if (currentMillis - previousMillis >= commandList[currentCommandIndex].seconds * 1000) {
+            const Command &command = commandList[currentCommandIndex];
+
+            Serial.println("Comando nome: " + command.name);
+            
+            if (command.name == "forward" || command.name == "frente") {
+                robot.forward(255, command.seconds * 1000, true);
+            } else if (command.name == "backward" || command.name == "tras") {
+                robot.backward(255, command.seconds * 1000, true);
+            } else if (command.name == "left" || command.name == "esquerda") {
+                robot.left(255, command.seconds * 1000, true);
+            } else if (command.name == "right" || command.name == "direita") {
+                robot.right(255, command.seconds * 1000, true);
+            } else if (command.name == "stop" || command.name == "parar") {
+                robot.stop();
+            }
+
+            Serial.println("Comando executado: " + command.name);
+
+            currentCommandIndex++;
+            previousMillis = currentMillis;  
+        }
     }
-    
-    delay(1000);
-  }
-  commandList.clear();
+
+    commandList.clear();
 }
 
 void parseCommands(String commands) {
-  char b[commands.length() + 1];
+    char b[commands.length() + 1];
+    commands.toCharArray(b, commands.length() + 1);
+    char* consumer = strtok(b, ";");
 
-  commands.toCharArray(b, commands.length() + 1);
+    while (consumer != nullptr) {
+        Command command;
+        command.name = String(consumer);
+        
+        consumer = strtok(nullptr, ";");
+        if (consumer != nullptr) {
+            command.seconds = atoi(consumer);
+        }
 
-  char* consumer = strtok(b, ";");
-
-  while (consumer != nullptr) {
-    Command command;
-
-    command.name = String(consumer);
-
-    consumer = strtok(nullptr, ";");
-    if (consumer != nullptr) {
-      command.seconds = atoi(consumer);
+        commandList.push_back(command);
+        consumer = strtok(nullptr, ";");
     }
+    
+    if (!commandList.empty()) {
 
-    commandList.push_back(command);
+        isRunning = true;
+        currentCommandIndex = 0;
 
-    consumer = strtok(nullptr, ";");
-  }
+        previousMillis = millis();
+    }
 }
 
 void setup() {
@@ -193,7 +211,7 @@ void setup() {
       String action = request->getParam("commands")->value();
 
       parseCommands(action);
-      operateCommands();
+
       request->send(204);
     }
   });
@@ -205,4 +223,5 @@ void setup() {
 
 void loop() {
   ftpSrv.handleFTP();
+  operateCommands();
 }
