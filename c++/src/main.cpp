@@ -30,6 +30,9 @@ vector<Command> commandList;
 
 void operateCommands() {
   for (const auto& command : commandList) {
+    Serial.println("recebi comando");
+    Serial.println("Comando nome:");
+    Serial.println(command.name);
 
     if (command.name == "forward" || command.name == "frente") {
       robot.forward(255, command.seconds * 1000, true);
@@ -42,10 +45,9 @@ void operateCommands() {
     } else if (command.name == "stop" || command.name == "parar") {
       robot.stop();
     }
-
-    delay(command.seconds * 1000);
+    
+    delay(1000);
   }
-
   commandList.clear();
 }
 
@@ -60,7 +62,7 @@ void parseCommands(String commands) {
     Command command;
 
     command.name = String(consumer);
-    
+
     consumer = strtok(nullptr, ";");
     if (consumer != nullptr) {
       command.seconds = atoi(consumer);
@@ -105,6 +107,10 @@ void setup() {
 
   Serial.println("WiFi AP started!");
   Serial.println(WiFi.softAPIP());
+
+  server.on("/jquery.min.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/jquery.min.js", "application/javascript");
+  });
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/index.html");   
@@ -152,44 +158,43 @@ void setup() {
 
   server.on("/frt", HTTP_GET, [](AsyncWebServerRequest *request) {
     robot.forward(255, 150, true);    
-
+    Serial.println("Comando executado: frente");
     request->send(204);
   });
 
   server.on("/trs", HTTP_GET, [](AsyncWebServerRequest *request) {
     robot.backward(255, 150, true);
-
+    Serial.println("Comando executado: trás");
     request->send(204);
   });
 
    server.on("/esq", HTTP_GET, [](AsyncWebServerRequest *request) {
     robot.left(255, 150, true);
-
+     Serial.println("Comando executado: esquerda");
     request->send(204);
   });
 
    server.on("/drt", HTTP_GET, [](AsyncWebServerRequest *request) {
     robot.right(255, 150, true);
-
+    Serial.println("Comando executado: direita");
     request->send(204);
   });
   
 
   server.on("/stop", HTTP_GET, [](AsyncWebServerRequest* request) {
     robot.stop();
-
+    Serial.println("Comando executado: parar");
     request->send(204);
   });
 
-  server.on("/action", HTTP_GET, [](AsyncWebServerRequest *request) {
+  server.on("/commands", HTTP_GET, [](AsyncWebServerRequest *request) {
 
-    if (request->hasParam("action")) {
-      String action = request->getParam("action")->value();
-
-      request->send(204);
+    if (request->hasParam("commands")) {
+      String action = request->getParam("commands")->value();
 
       parseCommands(action);
       operateCommands();
+      request->send(204);
     }
   });
 

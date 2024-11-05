@@ -1,28 +1,24 @@
-function move(where) {
-    var xhttp = new XMLHttpRequest();
-  
-    xhttp.open("GET", where, true);
-    xhttp.send();
-  }
-  
-  $(function () {
+function sendCommands(commands) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "/commands?commands=" + encodeURIComponent(commands), true);
+  xhttp.send();
+}
 
-    $("#action").submit(function (event) {
-        
+$(function () {
+  $("#action").submit(function (event) {
       event.preventDefault();
-  
-      var inputData = $("input[name='action']").val(); 
+    
+      var inputData = $("input[name='commands']").val(); 
 
       $.ajax({
-        type: "POST",
-        url: "/action", 
-        data: { input: inputData },
-        success: function () {
-          alert("Dados enviados com sucesso!");
-        },
-        error: function () {
-          alert("Erro ao enviar dados");
-        },
+          type: "GET",
+          url: "http://192.168.4.1/commands?commands=" + encodeURIComponent(inputData),
+          success: function () {
+              alert("Comandos enviados com sucesso!");
+          },
+          error: function () {
+              alert("Erro ao enviar comandos");
+          },
       });
-    });
   });
+});
